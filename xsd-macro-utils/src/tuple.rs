@@ -81,7 +81,7 @@ fn display(ast: &syn::DeriveInput) -> syn::Result<TokenStream> {
 }
 
 impl Type<'_> {
-    pub fn from_path(path: &syn::Path) -> Type {
+    pub fn from_path(path: &syn::Path) -> Type<'_> {
         match path.segments.last().expect("Empty type").ident.to_string().as_str() {
             "bool" | "i8" | "u8" | "i16" | "u16" | "i32" | "u32" | "i64" | "u64" | "f32"
             | "f64" => Type::Simple(path),
@@ -95,7 +95,7 @@ impl Type<'_> {
     }
 }
 
-fn extract_field_type(ast: &syn::DeriveInput) -> Type {
+fn extract_field_type(ast: &syn::DeriveInput) -> Type<'_> {
     match &ast.data {
         syn::Data::Struct(data_struct) => {
             let field_path = extract_field_path(data_struct).expect("Bad field count or type");

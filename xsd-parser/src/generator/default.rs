@@ -14,11 +14,11 @@ pub fn default_format_comment(doc: Option<&str>, max_len: usize, indent: usize) 
         .map(|s| s.trim())
         .filter(|s| s.len() > 1)
         .map(|s| split_comment_line(s, max_len, indent))
-        .fold(String::new(), |x, y| (x + &y))
+        .fold(String::new(), |x, y| x + &y)
 }
 
 pub fn default_format_name(name: &str) -> String {
-    sanitize(to_snake_case(name.split(':').last().unwrap()))
+    sanitize(to_snake_case(name.split(':').next_back().unwrap()))
 }
 
 pub fn default_format_type(type_name: &str, target_ns: &Option<Namespace>) -> Cow<'static, str> {

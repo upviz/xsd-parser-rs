@@ -34,8 +34,7 @@ pub fn parse_complex_type(node: &Node, parent: &Node) -> RsEntity {
 
     let content = node
         .children()
-        .filter(|n| n.is_element() && AVAILABLE_CONTENT_TYPES.contains(&n.xsd_type()))
-        .last();
+        .rfind(|n| n.is_element() && AVAILABLE_CONTENT_TYPES.contains(&n.xsd_type()));
 
     if content.is_none() || content.unwrap().children().filter(|n| n.is_element()).count() == 0 {
         //No content (or empty), only attributes

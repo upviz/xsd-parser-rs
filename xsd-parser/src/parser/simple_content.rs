@@ -9,8 +9,7 @@ use crate::parser::{
 pub fn parse_simple_content(node: &Node) -> RsEntity {
     let content = node
         .children()
-        .filter(|n| n.is_element() && n.xsd_type() != ElementType::Annotation)
-        .last()
+        .rfind(|n| n.is_element() && n.xsd_type() != ElementType::Annotation)
         .expect("Content in simpleContent required");
 
     parse_node(&content, node)

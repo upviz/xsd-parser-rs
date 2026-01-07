@@ -74,14 +74,11 @@ fn complex_content_restriction(node: &Node) -> RsEntity {
         ..Default::default()
     });
 
-    let content = node
-        .children()
-        .filter(|n| {
-            n.is_element()
-                && n.xsd_type() != ElementType::Attribute
-                && AVAILABLE_CONTENT_TYPES.contains(&n.xsd_type())
-        })
-        .last();
+    let content = node.children().rfind(|n| {
+        n.is_element()
+            && n.xsd_type() != ElementType::Attribute
+            && AVAILABLE_CONTENT_TYPES.contains(&n.xsd_type())
+    });
 
     if let Some(cont) = content {
         let mut res = parse_node(&cont, node);
