@@ -19,4 +19,4 @@ xsd-macro-utils = { path = "../xsd-macro-utils" }
 yaserde = "0.7"
 
 [dev-dependencies]
-yaserde_derive = "0.7"
+yaserde_derive = "0.12"
