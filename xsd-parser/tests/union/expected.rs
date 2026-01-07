@@ -12,3 +12,7 @@ impl Default for FooType {
 }
 
 impl Validate for FooType {}
+
+
+
+// pub type Foo = FooType;

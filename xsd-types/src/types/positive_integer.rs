@@ -80,7 +80,7 @@ mod tests {
     }
 
     #[derive(Default, Clone, PartialEq, Debug, YaSerialize, YaDeserialize)]
-    #[yaserde(prefix = "t", namespace = "t: test")]
+    #[yaserde(prefix = "t", namespaces = { "t" = "test" })]
     pub struct PositiveIntegerPair {
         #[yaserde(prefix = "t", rename = "First")]
         pub first: PositiveInteger,

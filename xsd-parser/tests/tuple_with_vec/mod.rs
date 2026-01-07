@@ -6,6 +6,7 @@ fn deserialization_works() {
         use std::str::FromStr;
 
         use xsd_macro_utils::*;
+        use xsd_parser::generator::validator::Validate;
 
         include!("expected.rs");
     }
@@ -14,7 +15,7 @@ fn deserialization_works() {
 
     let de: expected::FooType = yaserde::de::from_str(ser).unwrap();
 
-    assert_eq!(de, expected::FooType(vec![1, 2, 3]));
+    assert_eq!(de, expected::FooType(vec!["1".to_string(), "2".to_string(), "3".to_string()]));
 
     assert_eq!(
         r#"<?xml version="1.0" encoding="utf-8"?><FooType>1 2 3</FooType>"#,

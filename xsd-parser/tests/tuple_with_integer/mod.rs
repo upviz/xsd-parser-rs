@@ -9,7 +9,7 @@ fn deserialization_works() {
         use std::str::FromStr;
 
         use xsd_macro_utils::*;
-        use xsd_types::types::Integer;
+        use xsd_parser::generator::validator::Validate;
 
         include!("expected.rs");
     }

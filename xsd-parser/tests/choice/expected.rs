@@ -1,11 +1,13 @@
 #[derive(Default, Clone, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct BarType(pub String);
+pub struct BarType (pub String);
 
+impl Validate for BarType {}
 #[derive(Default, Clone, PartialEq, Debug, UtilsTupleIo, UtilsDefaultSerde)]
-pub struct BazType(pub i32);
+pub struct BazType (pub i32);
 
+impl Validate for BazType {}
 #[derive(PartialEq, Debug, Clone, YaSerialize, YaDeserialize)]
-#[yaserde(prefix = "tns", namespace = "tns: http://example.com")]
+#[yaserde(prefix = "tns", namespaces = { "tns" = "http://example.com" })]
 pub enum FooTypeChoice {
     Bar(BarType),
     Baz(BazType),
@@ -18,9 +20,18 @@ impl Default for FooTypeChoice {
     }
 }
 
+impl Validate for FooTypeChoice {}
+
 #[derive(Default, Clone, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(prefix = "tns", namespace = "tns: http://example.com")]
+#[yaserde(prefix = "tns", namespaces = { "tns" = "http://example.com" })]
 pub struct FooType {
-    #[yaserde(flatten)]
+    #[yaserde(flatten = true)]
     pub foo_type_choice: FooTypeChoice,
 }
+
+impl Validate for FooType {}
+
+
+
+
+// pub type Foo = FooType;

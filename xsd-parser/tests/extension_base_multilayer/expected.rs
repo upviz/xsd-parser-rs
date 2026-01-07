@@ -1,5 +1,5 @@
 #[derive(Default, Clone, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(prefix = "tns", namespace = "tns: http://example.com")]
+#[yaserde(prefix = "tns", namespaces = { "tns" = "http://example.com" })]
 pub struct BarType {
     #[yaserde(prefix = "tns", rename = "aa")]
     pub aa: i32,
@@ -10,8 +10,9 @@ pub struct BarType {
 
 impl Validate for BarType {}
 
+
 #[derive(Default, Clone, PartialEq, Debug, YaSerialize, YaDeserialize)]
-#[yaserde(prefix = "tns", namespace = "tns: http://example.com")]
+#[yaserde(prefix = "tns", namespaces = { "tns" = "http://example.com" })]
 pub struct FooType {
     #[yaserde(prefix = "tns", rename = "Messages")]
     pub messages: foo_type::MessagesType,
@@ -21,9 +22,9 @@ impl Validate for FooType {}
 
 pub mod foo_type {
     use super::*;
-
+    
     #[derive(Default, Clone, PartialEq, Debug, YaSerialize, YaDeserialize)]
-    #[yaserde(prefix = "tns", namespace = "tns: http://example.com")]
+    #[yaserde(prefix = "tns", namespaces = { "tns" = "http://example.com" })]
     pub struct MessagesType {
         #[yaserde(prefix = "tns", rename = "a")]
         pub a: String,
@@ -36,4 +37,7 @@ pub mod foo_type {
     }
 
     impl Validate for MessagesType {}
+
 }
+
+// pub type Foo = FooType;
