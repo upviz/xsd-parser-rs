@@ -149,7 +149,7 @@ mod tests {
     }
 
     #[derive(Default, Clone, PartialEq, Debug, YaSerialize, YaDeserialize)]
-    #[yaserde(prefix = "t", namespace = "t: test")]
+    #[yaserde(prefix = "t", namespaces = { "t" = "test" })]
     pub struct Message {
         #[yaserde(prefix = "t", rename = "CreatedAt")]
         pub created_at: GDay,

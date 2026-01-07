@@ -30,11 +30,11 @@ pub fn match_built_in_type(type_name: &str, xsd_ns: &Option<Namespace>) -> Optio
 
         "boolean" => "bool",
 
-        "integer" => "xs::Integer",
-        "nonNegativeInteger" => "xs::NonNegativeInteger",
-        "positiveInteger" => "xs::PositiveInteger",
-        "nonPositiveInteger" => "xs::NonPositiveInteger",
-        "negativeInteger" => "xs::NegativeInteger",
+        "integer" => "xsd_types::types::Integer",
+        "nonNegativeInteger" => "xsd_types::types::NonNegativeInteger",
+        "positiveInteger" => "xsd_types::types::PositiveInteger",
+        "nonPositiveInteger" => "xsd_types::types::NonPositiveInteger",
+        "negativeInteger" => "xsd_types::types::NegativeInteger",
 
         "long" => "i64",
         "int" => "i32",
@@ -46,23 +46,23 @@ pub fn match_built_in_type(type_name: &str, xsd_ns: &Option<Namespace>) -> Optio
         "unsignedShort" => "u16",
         "unsignedByte" => "u8",
 
-        "decimal" => "xs::Decimal",
+        "decimal" => "xsd_types::types::Decimal",
 
         "double" => "f64",
         "float" => "f64",
 
-        "date" => "xs::Date",
-        "time" => "xs::Time",
-        "dateTime" => "xs::DateTime",
-        "dateTimeStamp" => "xs::DateTimeStamp",
+        "date" => "xsd_types::types::Date",
+        "time" => "xsd_types::types::Time",
+        "dateTime" => "xsd_types::types::DateTime",
+        "dateTimeStamp" => "xsd_types::types::DateTimeStamp",
 
-        "duration" => "xs::Duration",
+        "duration" => "xsd_types::types::Duration",
 
-        "gDay" => "xs::GDay",
-        "gMonth" => "xs::GMonth",
-        "gMonthDay" => "xs::GMonthDay",
-        "gYear" => "xs::GYear",
-        "gYearMonth" => "xs::GYearMonth",
+        "gDay" => "xsd_types::types::GDay",
+        "gMonth" => "xsd_types::types::GMonth",
+        "gMonthDay" => "xsd_types::types::GMonthDay",
+        "gYear" => "xsd_types::types::GYear",
+        "gYearMonth" => "xsd_types::types::GYearMonth",
 
         "string" => "String",
         "normalizedString" => "String",

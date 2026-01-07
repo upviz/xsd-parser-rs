@@ -70,16 +70,22 @@ pub trait EnumGenerator {
         match tns.as_ref() {
             Some(tn) => match tn.name() {
                 Some(name) => format!(
-                    "{derives}#[yaserde(prefix = \"{prefix}\", namespace = \"{prefix}: {uri}\")]\n",
+                    "{derives}#[yaserde(prefix = \"{prefix}\", namespaces = {{ \"{prefix}\" = \"{uri}\" }})]\n",
                     derives = derives,
                     prefix = name,
                     uri = tn.uri()
                 ),
-                None => format!(
-                    "{derives}#[yaserde(namespace = \"{uri}\")]\n",
-                    derives = derives,
-                    uri = tn.uri()
-                ),
+                None => {
+                    // No explicit prefix in the schema for the target namespace.
+                    // Use yaserde's "default namespace" mechanism so generated elements remain unprefixed.
+                    let prefix = "tns";
+                    format!(
+                        "{derives}#[yaserde(prefix = \"{prefix}\", default_namespace = \"{prefix}\", namespaces = {{ \"{prefix}\" = \"{uri}\" }})]\n",
+                        derives = derives,
+                        prefix = prefix,
+                        uri = tn.uri()
+                    )
+                }
             },
             None => format!("{derives}#[yaserde()]\n", derives = derives),
         }

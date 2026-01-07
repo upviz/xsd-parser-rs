@@ -39,7 +39,7 @@ mod tests {
     use crate::utils::xml_eq::assert_xml_eq;
 
     #[derive(Default, Clone, PartialEq, Debug, YaSerialize, YaDeserialize)]
-    #[yaserde(prefix = "t", namespace = "t: test")]
+    #[yaserde(prefix = "t", namespaces = { "t" = "test" })]
     pub struct DecimalPair {
         #[yaserde(prefix = "t", rename = "First")]
         pub first: Decimal,
