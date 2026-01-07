@@ -92,8 +92,7 @@ fn parse_field_of_sequence(node: &Node, _: &Node) -> RsEntity {
 
     let content_node = node
         .children()
-        .filter(|n| SUPPORTED_CONTENT_TYPES.contains(&n.xsd_type()))
-        .last()
+        .rfind(|n| SUPPORTED_CONTENT_TYPES.contains(&n.xsd_type()))
         .unwrap_or_else(|| panic!("Must have content if no 'type' or 'ref' attribute: {:?}", node));
 
     let mut field_type = parse_node(&content_node, node);
@@ -122,8 +121,7 @@ fn parse_global_element(node: &Node) -> RsEntity {
         });
     }
 
-    let content_node =
-        node.children().filter(|n| SUPPORTED_CONTENT_TYPES.contains(&n.xsd_type())).last();
+    let content_node = node.children().rfind(|n| SUPPORTED_CONTENT_TYPES.contains(&n.xsd_type()));
 
     if let Some(content) = content_node {
         let mut content_entity = parse_node(&content, node);

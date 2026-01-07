@@ -69,7 +69,7 @@ impl<'a> Definitions<'a> {
         &self.port_types
     }
 
-    pub fn types(&self) -> &[Types] {
+    pub fn types(&self) -> &[Types<'a>] {
         self.types.as_ref()
     }
 
@@ -77,8 +77,8 @@ impl<'a> Definitions<'a> {
         &self.messages
     }
 
-    pub fn get_message_by_param(&self, param: &Param<'_>) -> Option<&Message> {
-        self.messages.get(param.message().split(':').last().unwrap())
+    pub fn get_message_by_param(&self, param: &Param<'_>) -> Option<&Message<'a>> {
+        self.messages.get(param.message().split(':').next_back().unwrap())
     }
 
     pub fn new(definitions: &Node<'a, '_>) -> Self {

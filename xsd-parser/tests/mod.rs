@@ -1,3 +1,10 @@
+// NOTE: `yaserde_derive` currently triggers `non_local_definitions` warnings on recent Rust,
+// which become hard errors under `-D warnings` (CI). Allow it for the integration-test crate.
+#![allow(non_local_definitions)]
+// The generated `expected.rs` fixtures intentionally contain unused types; treat those as OK
+// for the integration-test crate.
+#![allow(dead_code)]
+
 #[macro_use]
 mod utils;
 mod all;

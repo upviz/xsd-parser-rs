@@ -44,7 +44,7 @@ impl Struct {
             .iter()
             .filter(|f| f.name.as_str() == tag::BASE)
             .flat_map(|f| {
-                let key = f.type_name.split(':').last().unwrap().to_string();
+                let key = f.type_name.split(':').next_back().unwrap().to_string();
                 types.get(&key).map(|s| s.fields.borrow().clone()).unwrap_or_default()
             })
             .filter(|f| {
@@ -70,7 +70,7 @@ impl Struct {
             .borrow()
             .iter()
             .flat_map(|f| {
-                let key = f.original.split(':').last().unwrap().to_string();
+                let key = f.original.split(':').next_back().unwrap().to_string();
                 types.get(&key).map(|s| s.fields.borrow().clone()).unwrap_or_default()
             })
             .collect::<Vec<StructField>>();

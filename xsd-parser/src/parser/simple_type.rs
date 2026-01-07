@@ -18,8 +18,7 @@ pub fn parse_simple_type(node: &Node, parent: &Node) -> RsEntity {
 
     let content = node
         .children()
-        .filter(|n| n.is_element() && n.xsd_type() != ElementType::Annotation)
-        .last()
+        .rfind(|n| n.is_element() && n.xsd_type() != ElementType::Annotation)
         .expect(
             "Simple types must be defined in one of the following ways: [Union, List, Restriction]",
         );

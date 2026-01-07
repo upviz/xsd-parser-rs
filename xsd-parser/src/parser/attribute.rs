@@ -58,7 +58,7 @@ fn parse_global_attribute(node: &Node) -> RsEntity {
     }
 
     if let Some(content) =
-        node.children().filter(|n| n.is_element() && n.xsd_type() == ElementType::SimpleType).last()
+        node.children().rfind(|n| n.is_element() && n.xsd_type() == ElementType::SimpleType)
     {
         let mut entity = parse_node(&content, node);
         entity.set_name(name);

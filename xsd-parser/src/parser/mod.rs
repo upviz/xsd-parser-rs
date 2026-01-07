@@ -32,14 +32,13 @@ use crate::parser::{
 
 // FIXME: Actually pass up errors
 #[allow(clippy::result_unit_err)]
-pub fn parse(text: &str) -> Result<RsFile, ()> {
+pub fn parse(text: &str) -> Result<RsFile<'_>, ()> {
     let doc = roxmltree::Document::parse(text).expect("Parse document error");
     let root = doc.root();
 
     let mut map = HashMap::new();
 
-    let schema =
-        root.children().filter(|e| e.is_element()).last().expect("Schema element is required");
+    let schema = root.children().rfind(|e| e.is_element()).expect("Schema element is required");
 
     let schema_rs = parse_schema(&schema);
     for ty in &schema_rs.types {

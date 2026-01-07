@@ -40,7 +40,7 @@ impl<'a> PortType<'a> {
         self.node.attribute(attribute::NAME).expect("Name required for wsdl:portType")
     }
 
-    pub fn operations(&self) -> &[Operation] {
+    pub fn operations(&self) -> &[Operation<'a>] {
         self.operations.as_ref()
     }
 }
@@ -92,7 +92,7 @@ impl<'a> Operation<'a> {
         self.node.attribute(attribute::PARAMETER_ORDER)
     }
 
-    pub fn operation_type(&self) -> &OperationType {
+    pub fn operation_type(&self) -> &OperationType<'a> {
         &self.ty
     }
 
